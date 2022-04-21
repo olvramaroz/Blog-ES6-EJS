@@ -1,0 +1,81 @@
+<h1>Bon de commande</h1>
+
+<table>
+    <caption>Liste des commandes</caption>
+
+    <thead>
+        <tr>
+            <th>Commande</th>
+            <th>Date de la commande</th>
+            <th>Date de livraison</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach(order => { %>
+            <tr>
+                <td>
+                    <a href="/detail/<%= order.orderNumber %>"><%= order.orderNumber %></a>
+                </td>
+                <td><%= order.orderDate.toLocaleDateString() %></td>
+                <td><%= order.shippedDate %></td>
+                <td><%= order.status %></td>
+            </tr>
+        <% }); %>
+
+    </tbody>
+</table>
+
+
+
+// app.get('/', (req, res) => {
+
+    //     pool.query('SELECT * FROM blog', function (error, results, fields){
+    //         if(error){
+    //             throw Error;
+    //         } else {
+    //             console.log(results);
+    //             res.render("layout", {template: "home", data: results})
+    //         }
+    //     });
+    // })
+    
+    // app.get('/detail/:id', (req, res)=>{
+    //     let id = req.params.id;
+        
+    //     pool.query(`
+    //             SELECT customerName, contactLastName, contactFirstName, addressLine1, city
+    //             FROM customers
+    //             JOIN orders 
+    //             ON orders.customerNumber = customers.customerNumber
+    //             WHERE orderNumber = ?
+    //         `, [id], (err, customer) => {
+    //                 console.log(customer);
+    //         pool.query(`
+    //                     SELECT productName, priceEach, quantityOrdered, priceEach *quantityOrdered AS totalPrice 
+    //                     FROM orderDetails
+    //                     JOIN products
+    //                     ON products.productCode = orderDetails.productCode
+    //                     WHERE orderNumber = ?
+    //                 `, [id], function (err, orderDetail){
+    //                     console.log(orderDetail);
+    
+    //                     pool.query('SELECT SUM(priceEach * quantityOrdered) AS totalAmount FROM orderDetails WHERE orderNumber = ?', [id], function (err, result){
+    
+    //                         let totalAmount = result[0].totalAmount                        
+    //                         console.log(totalAmount);
+    //                         res.render('layout', {
+    //                             template: "detail",
+    //                             customer: customer[0],
+    //                             orderDetail: orderDetail,
+    //                             totalAmount: totalAmount,
+    //                             orderNumber: id,
+    //                         })
+    
+    //                     })
+    //                 }
+    //         )
+    
+    //     })
+    // })
+    

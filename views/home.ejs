@@ -1,0 +1,25 @@
+<header class="blog-header">
+    <h1>mon blog</h1>
+    <nav>
+        <a href="/">home</a>
+        <a href="/admin">admin</a>
+    </nav>
+</header>
+<main>
+    <h2>Bienvenue sur mon blog</h2>
+    <section>
+        <% data.forEach(post => { 
+            %>
+                <article class="single-post">
+                    <h3 onclick="location.href=`postdetails/<%- post.Id %>`"><%= post.Title %></h3>
+                    <p><%- post.Contents %></p>
+                    <p><%- post.CreationTimestamp.toLocaleDateString() %></p>
+                </article>
+            <% 
+        }) %>
+    </section>
+</main>
+<footer class="blog-footer">
+    <p>Le blog qui tue la mouche !</p>
+    <p>by Valérie</p>
+</footer>
