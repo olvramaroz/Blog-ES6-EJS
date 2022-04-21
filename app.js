@@ -23,28 +23,29 @@ const pool = mysql.createPool({
 
 console.log(`connected to ${pool.config.connectionConfig.database}`);
 
+// get all posts
 app.get('/', (req, res) => {
-    pool.query("SELECT Title, Contents, CreationTimestamp FROM post", (error, result) => {
+    pool.query("SELECT Id, Title, Contents, CreationTimestamp FROM post", (error, allPosts) => {
         if(error) {
             console.log(error);
         } else {
-            res.render('layout', {template: 'home', data: result})
+            res.render('layout', {template: 'home', data: allPosts})
         }
     })
 })
 
-// app.get('/admin', (req, res) => {
-    
-//     pool.query("SELECT Role FROM user", (error, result) => {
-//         if(error) {
-//             console.log(error);
-//         } if (role === admin) {
-//             res.render('layout', {template: 'admin', data: result})
-//         } else {
-//             res.render('layout', {template: 'home', data: result})
-//         }
-//     })
-// })
+// get one post
+app.get('/post/:id', (req, res) => {
+    let id = req.params.id;
+    pool.query(`SELECT * FROM post WHERE Id = ?`, [id], (error, onePost) => {
+        console.log(onePost);
+        if(error) {
+            throw error
+        } else {
+            res.render('layout', {template: 'postdetails', data: onePost})
+        }
+    })
+})
 
 
 

@@ -11,7 +11,7 @@
         <% data.forEach(post => { 
             %>
                 <article class="single-post">
-                    <h3 onclick="location.href=`postdetails/<%- post.Id %>`"><%= post.Title %></h3>
+                    <h3><a href="/post/<%= post.Id %>"><%= post.Title %></a></h3>
                     <p><%- post.Contents %></p>
                     <p><%- post.CreationTimestamp.toLocaleDateString() %></p>
                 </article>

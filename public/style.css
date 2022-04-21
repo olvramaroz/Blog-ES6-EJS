@@ -50,7 +50,8 @@ main h2 {
 	margin: 2rem 0;
 }
 
-main h3 {
+h3, h3 a {
+	text-decoration: none;
 	color: #0cd6b4;
 	cursor: pointer;
 }
