@@ -8,13 +8,13 @@
 <main>
     <section>
         <% 
-            data.forEach(item => {
+            dataPost.forEach(item => {
                 %>
                     <article class="single-post">
                         <aside class="single-post_header">
                             <img alt="Avatar de l'auteur de la publication" src="<%= item.Avatar %>" />
                             <div>
-                                <p><span><%- item.firstName %> <%- item.lastName %></span></p>
+                                <p><span><%- item.FirstName %> <%- item.LastName %></span></p>
                                 <p class="font14"><%- item.CreationTimestamp.toLocaleDateString() %></p>
                             </div>
                         </aside>
@@ -22,16 +22,34 @@
                         <h3 class="single-post_title"><%= item.Title %></h3>
                         <div class="single-post_body">
                             <p><%- item.Contents %></p>
-                            <p><i class="fa-solid fa-comments"></i></p>
+                            <p><i class="fa-solid fa-heart fa-lg"></i></p>
                         </div>
                     </article>
                 <%
             })
         %> 
     </section>
+
     <div class="divider"></div>
+
+    <section>
+        <%
+            dataComments.forEach(comment => {
+                %>
+                    <article class="comments">
+                        <aside>
+                            <h3><%- comment.NickName %></h3>
+                            <p class="font14"><%- comment.CreationTimestamp.toLocaleDateString() %></p>
+                        </aside>
+                        <p><%- comment.message %></p>
+                    </article>
+                <%
+            })
+        %>    
+    </section>
+
 </main>
 <footer class="blog-footer">
     <p>Le blog qui tue la mouche !</p>
-    <p>by Valérie</p>
+    <p>Coded with <i class="fa-solid fa-heart fa-lg"></i> by Ony Lalaina Valérie</p>
 </footer>

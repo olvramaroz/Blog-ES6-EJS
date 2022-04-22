@@ -67,15 +67,10 @@ main h2 {
 	margin: 2rem 0;
 }
 
-h3, h3 a {
-	color: #0cd6b4;
-	/* color: #0c7968; */
-}
-
 	/************ 
 	POST CARDS 
 	*************/
-.single-post {
+.single-post, .comments  {
 	margin: 1rem auto;
     box-shadow: 0px 0px 5px lightgrey;
     border-radius: 20px;
@@ -106,6 +101,12 @@ h3, h3 a {
 
 .single-post_title {
 	padding: 0 1rem;
+	color: #0cd6b4;
+	/* color: #0c7968; */
+}
+
+.single-post_title a {
+	color: #0cd6b4;
 }
 
 .single-post_body {
@@ -120,12 +121,17 @@ h3, h3 a {
 
 .fa-comments {
 	color: #0cd6b4;
-	font-size: 30px;
 }
 
+.fa-heart {
+	color: #ff407e;
+}
+
+
 @media screen and (min-width: 300px) and (max-width: 768px) {
+
+
 	.blog-header h1 {
-		/* padding: 4rem 0.5rem; */
 		padding: 0 0.5rem;
 	}
 	
@@ -133,7 +139,7 @@ h3, h3 a {
 		padding: 0;
 	}
 
-	.single-post {
+	.single-post, .comments {
 		width: auto;
 		margin: 1rem;
 	}
@@ -150,13 +156,22 @@ h3, h3 a {
 	margin: 1rem auto;
 }
 
-/* .single-post_author {
-	color: darkslategrey;
-    padding: 1rem;
-    font-family: 'Square Peg', cursive, Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-} */
+.comments {
+	display: flex;
+    background-color: #d3d3d33b;
+    flex-direction: column;
+	padding: 1rem;
+}
+
+.comments aside {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: .5rem;
+}
+
+.comments aside p {
+	font-weight: bold;
+}
 
 
 /************ PUBLISH CARD *************/

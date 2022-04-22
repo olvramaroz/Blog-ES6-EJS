@@ -13,6 +13,10 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+
 
 const pool = mysql.createPool({
     host: "localhost",
@@ -39,28 +43,45 @@ app.get('/', (req, res) => {
     })
 })
 
-// get one post
+// get one post with comments
 app.get('/post/:id', (req, res) => {
     let id = req.params.id;
+
+    // Query to get a post by id
     pool.query(`
-        SELECT post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
+        SELECT post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.FirstName, author.LastName
         FROM post
         JOIN author
         ON post.Author_Id = author.Id
         WHERE post.Id = ?
     `, [id], (error, onePost) => {
-        if(error) {
-            throw error
-        } else {
-            res.render('layout', {template: 'postdetails', data: onePost})
-        }
+        
+        // Query to get comments linked to the post id
+        pool.query(`
+            SELECT comment.NickName, comment.Contents AS message, comment.CreationTimestamp, post.Title, post.Contents, author.FirstName, author.LastName
+            FROM comment
+            JOIN post
+            ON post.Id = comment.Post_Id
+            JOIN author
+            ON author.Id = post.Author_Id
+            WHERE post.Id = ?
+        `, [id], (err, comments) => {
+            if (err) {
+                throw err
+            } else {
+                res.render('layout', {template: 'postdetails', dataComments: comments, dataPost: onePost})
+            }
+        })
     })
 })
-
-
-
 
 
 app.listen(PORT, ()=>{
     console.log(`Listening at http://localhost:${PORT}`);
 })
+
+// SELECT comment.NickName, comment.Contents, comment.CreationTimestamp, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
+//         FROM comment
+//         JOIN post
+//         ON comment.Post_Id = post.Id
+//         WHERE post.Id = ?
