@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
+
+/************ GLOBAL *************/
 
 * {
 	margin: 0;
@@ -8,42 +11,56 @@
 
 body {
 	font-family: "Roboto", sans-serif;
+	background-color: rgb(240, 242, 245);
+	/* background-color: #333; */
+}
+
+a {
+	text-decoration: none;
+}
+
+.font14 {
+	font-size: 14px;
+}
+
+.txt-center {
+	text-align: center;
 }
 
 
-/****** HEADER *******/
+/************ HEADER *************/
 
 .blog-header {
 	background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("./fond.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 300px;
-	padding: 100px;
-	text-align: center;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .blog-header h1 {
 	text-transform: capitalize;
-	text-decoration: underline;
 	color: #fff;
 	font-size: 2.5rem;
 }
 
 .blog-header nav {
-	padding-top: 7rem;
+	/* padding-top: 7rem; */
 	text-align: right;
 }
 
 .blog-header nav a {
 	color: white;
 	margin: 10px;
+	border-radius: 10px;
+    border: 1px solid;
+    padding: 0.5rem;
 }
 
-/****** MAIN  *******/
-main {
-	text-align: center;
-}
-
+/************ MAIN *************/
 main h2 {
 	color: #9b9b9b;
 	text-decoration: underline;
@@ -51,19 +68,111 @@ main h2 {
 }
 
 h3, h3 a {
-	text-decoration: none;
 	color: #0cd6b4;
-	cursor: pointer;
+	/* color: #0c7968; */
 }
 
+	/************ 
+	POST CARDS 
+	*************/
 .single-post {
-	margin: 1rem 0;
+	margin: 1rem auto;
+    box-shadow: 0px 0px 5px lightgrey;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 680px;
 }
 
-.single-post::after {
-	content: "__";
+.single-post_header img {
+	width: 50px;
 }
 
+.single-post_header {
+	display: flex;
+    align-items: flex-start;
+	padding: 0.5rem;
+}
+
+.single-post_header div {
+	display: block;
+    margin: auto 0;
+    padding-left: 0.5rem;
+	/* color: #fff; */
+}
+
+.single-post_header div span {
+	font-weight: bold;
+}
+
+.single-post_title {
+	padding: 0 1rem;
+}
+
+.single-post_body {
+	display: flex;
+	justify-content: space-between;
+}
+
+.single-post_body > p {
+	padding: .7rem 1rem;
+	/* color: #fff; */
+}
+
+.fa-comments {
+	color: #0cd6b4;
+	font-size: 30px;
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+	.blog-header h1 {
+		/* padding: 4rem 0.5rem; */
+		padding: 0 0.5rem;
+	}
+	
+	.blog-header {
+		padding: 0;
+	}
+
+	.single-post {
+		width: auto;
+		margin: 1rem;
+	}
+}
+
+	/************ 
+	COMMENTS 
+	*************/
+
+.divider {
+	height: 2px;
+	width: 300px;
+	background-color: grey;
+	margin: 1rem auto;
+}
+
+/* .single-post_author {
+	color: darkslategrey;
+    padding: 1rem;
+    font-family: 'Square Peg', cursive, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+} */
+
+
+/************ PUBLISH CARD *************/
+
+
+
+
+
+
+
+
+
+
+/************ GLOBAL *************/
+/************ GLOBAL *************/
+/************ GLOBAL *************/
 .back {
 	font-size: 1.8rem;
 	padding: 1%;
@@ -194,12 +303,7 @@ hr {
 	font-size: 0.7em;
 }
 
-.divider {
-	height: 1px;
-	width: 80px;
-	background-color: grey;
-	margin: auto;
-}
+
 
 /********** ADMIN ****/
 /* 
@@ -242,6 +346,7 @@ hr {
 /********** FOOTER *************/
 
 .blog-footer {
+	width: 100vw;
 	background-color: #0cd6b4;
 	text-align: center;
 	padding: 25px;

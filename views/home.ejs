@@ -1,19 +1,29 @@
 <header class="blog-header">
-    <h1>mon blog</h1>
+    <h1>Publiez, partagez, exprimez-vous ! </h1>
     <nav>
         <a href="/">home</a>
         <a href="/admin">admin</a>
     </nav>
 </header>
 <main>
-    <h2>Bienvenue sur mon blog</h2>
+    <h2 class="txt-center">Voici les dernières publications</h2>
     <section>
         <% data.forEach(post => { 
             %>
                 <article class="single-post">
-                    <h3><a href="/post/<%= post.Id %>"><%= post.Title %></a></h3>
-                    <p><%- post.Contents %></p>
-                    <p><%- post.CreationTimestamp.toLocaleDateString() %></p>
+                    <aside class="single-post_header">
+                        <img alt="Avatar de l'auteur de la publication" src="<%= post.Avatar %>" />
+                        <div>
+                            <p><span><%- post.firstName %> <%- post.lastName %></span></p>
+                            <p class="font14"><%- post.CreationTimestamp.toLocaleDateString() %></p>
+                        </div>
+                    </aside>
+
+                    <h3 class="single-post_title"><a href="/post/<%= post.Id %>"><%= post.Title %></a></h3>
+                    <div class="single-post_body">
+                        <p><%- post.Contents %></p>
+                        <p><a href="/post/<%= post.Id %>"><i class="fa-solid fa-comments"></i></a></p>
+                    </div>
                 </article>
             <% 
         }) %>

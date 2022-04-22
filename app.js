@@ -25,7 +25,12 @@ console.log(`connected to ${pool.config.connectionConfig.database}`);
 
 // get all posts
 app.get('/', (req, res) => {
-    pool.query("SELECT Id, Title, Contents, CreationTimestamp FROM post", (error, allPosts) => {
+    pool.query(`
+        SELECT post.Id, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
+        FROM post
+        JOIN author
+        ON post.Author_Id = author.Id
+        `, (error, allPosts) => {
         if(error) {
             console.log(error);
         } else {
@@ -38,13 +43,12 @@ app.get('/', (req, res) => {
 app.get('/post/:id', (req, res) => {
     let id = req.params.id;
     pool.query(`
-        SELECT post.Title, post.Contents, author.firstName, author.lastName
+        SELECT post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
         FROM post
         JOIN author
         ON post.Author_Id = author.Id
         WHERE post.Id = ?
     `, [id], (error, onePost) => {
-        console.log('::', onePost);
         if(error) {
             throw error
         } else {
@@ -53,15 +57,7 @@ app.get('/post/:id', (req, res) => {
     })
 })
 
-// SELECT author.firstName, author.lastName
-// FROM author
-// JOIN post.Title, post.Contents FROM post
-// ON author.Id = post.Id
 
-        // JOIN author
-        // ON post.Author_Id = author.firstName
-
-        // ON author.Id = post.Id
 
 
 
