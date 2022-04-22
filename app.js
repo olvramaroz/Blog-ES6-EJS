@@ -80,8 +80,3 @@ app.listen(PORT, ()=>{
     console.log(`Listening at http://localhost:${PORT}`);
 })
 
-// SELECT comment.NickName, comment.Contents, comment.CreationTimestamp, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
-//         FROM comment
-//         JOIN post
-//         ON comment.Post_Id = post.Id
-//         WHERE post.Id = ?
