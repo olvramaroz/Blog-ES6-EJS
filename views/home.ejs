@@ -6,7 +6,7 @@
     </nav>
 </header>
 <main>
-    <h2 class="txt-center">Voici les dernières publications</h2>
+        <h2 class="txt-center home-publication-list">Les dernières publications</h2>
     <section>
         <% data.forEach(post => { 
             %>
@@ -14,7 +14,7 @@
                     <aside class="single-post_header">
                         <img alt="Avatar de l'auteur de la publication" src="<%= post.Avatar %>" />
                         <div>
-                            <p><span><%- post.firstName %> <%- post.lastName %></span></p>
+                            <p><span><%- post.FirstName %> <%- post.LastName %></span></p>
                             <p class="font14"><%- post.CreationTimestamp.toLocaleDateString() %></p>
                         </div>
                     </aside>

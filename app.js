@@ -1,23 +1,35 @@
-import {fileURLToPath} from "url";
-import path from "path";
+// Variable d'environnement
 import 'dotenv/config';
-import express from 'express';
-import mysql from 'mysql';
-
-const app = express();
 const PORT = process.env.PORT || process.env.PORT_LOCAL
+
+// Gestion des routes folders
+import { fileURLToPath } from "url";
+import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Base de données
+import mysql from 'mysql';
+
+// Express
+import express from 'express';
+const app = express();
+
+// Moteur d'affichage
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+// Middleware pour extraire les données du formaulaire
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
-
+/**********************
+ *  
+ * DATABASE CONNECTION *
+ * 
+ * *******************/
 const pool = mysql.createPool({
     host: "localhost",
     database: "blog",
@@ -27,10 +39,76 @@ const pool = mysql.createPool({
 
 console.log(`connected to ${pool.config.connectionConfig.database}`);
 
+
+/**********************
+ *  
+ * A D M I N *
+ * 
+ * *******************/
+// get all posts
+app.get('/admin', (req, res) => {
+    pool.query(`
+        SELECT post.Id, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.FirstName, author.LastName
+        FROM post
+        JOIN author
+        ON post.Author_Id = author.Id
+        `, (error, adminPosts) => {
+        if(error) {
+            console.log(error);
+        } else {
+            res.render('layout', {template: 'admin', dataAdmin: adminPosts})
+        }
+    })
+})
+
+// create a post
+app.get('/admin/post', (req, res) => {
+    pool.query(`SELECT * FROM author`,
+       (error, getAuthor) => {
+            pool.query(`SELECT * FROM category`, (error, getCategory) => {
+                if (error) {
+                   throw error
+                } else {
+                   res.render('layout', { template: 'adminPost', author: getAuthor, category: getCategory })
+                }
+            })
+        }
+    )
+})
+ 
+app.post('/admin/post', (req, res) => {
+    const titre = req.body.title
+    const message = req.body.content
+    const date = new Date()
+    const auteur = req.body.author
+    const categorie = req.body.category
+
+    pool.query(`
+    INSERT INTO post (Title, Contents, CreationTimestamp, Author_Id, Category_Id) 
+    VALUES(?,?,?,?,?)`,
+       [titre, message, date, auteur, categorie], (error, sendPost) => {
+          if (error) {
+             throw error;
+          } else {
+             res.redirect('/admin');
+          }
+       })
+})
+
+
+
+
+
+/**********************
+ *  
+ * P U B L I C *
+ * 
+ * *******************/
+
 // get all posts
 app.get('/', (req, res) => {
     pool.query(`
-        SELECT post.Id, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.firstName, author.lastName
+        SELECT post.Id, post.Title, post.Contents, post.CreationTimestamp, author.Avatar, author.FirstName, author.LastName
         FROM post
         JOIN author
         ON post.Author_Id = author.Id
