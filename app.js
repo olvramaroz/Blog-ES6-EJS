@@ -98,25 +98,25 @@ app.post('/admin/post', (req, res) => {
 // end create a post admin
 
 // update a post
-app.get('admin/edit/:id', (req, res) => {
+app.get('/admin/edit/:id', (req, res) => {
     let id = req.params.id
     pool.query(`
         SELECT Title, Contents
         FROM post
         WHERE post.Id = ?
-        `, [id], (error, results) => {
-            console.log('results::', results)
+        `, [id], (error, result) => {
+            console.log(result)
 
             if (error) {
                 throw error;
             } else {
-                res.render('layout', { template: 'adminEdit', data: results })
+                res.render('layout', { template: 'adminEdit', data: result })
             }
         }
     )             
 }) 
  
-app.put('admin/edit/:id', (req, res) => {
+app.post('/admin/edit/:id', (req, res) => {
     const titre = req.body.title
     const message = req.body.content
     let id = req.params.id
@@ -125,8 +125,9 @@ app.put('admin/edit/:id', (req, res) => {
         UPDATE post
         SET Title = ?, Contents = ?
         WHERE post.Id = ?`,
-        [id, titre, message],
+        [titre, message, id],
         (error, result) => {
+            console.log(result);
             if (error) {
                 throw error;
             } else {
