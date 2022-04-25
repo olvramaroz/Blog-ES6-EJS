@@ -11,6 +11,19 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <%- include(template) -%>
+        <header class="blog-header">
+            <h1>Venez avec des cookies !</h1>
+            <nav>
+                <a href="/">home</a>
+                <a href="/admin">admin</a>
+            </nav>
+        </header>
+        <main>
+            <%- include(template) -%>
+        </main>
+        <footer class="blog-footer">
+            <p>Le blog qui tue la mouche !</p>
+            <p>Coded with <i class="fa-solid fa-heart fa-lg"></i> by Ony Lalaina Valérie</p>
+        </footer>
     </body>
 </html>
