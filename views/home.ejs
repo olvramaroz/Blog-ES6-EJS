@@ -19,11 +19,15 @@
                         </div>
                     </aside>
 
-                    <h3 class="single-post_title"><a href="/post/<%= post.Id %>"><%= post.Title %></a></h3>
-                    <div class="single-post_body">
-                        <p><%- post.Contents %></p>
-                        <p><a href="/post/<%= post.Id %>"><i class="fa-solid fa-comments fa-2x"></i></a></p>
-                    </div>
+                    <aside class="container-post">
+                        <div class="container-post_txt_home">
+                            <h3 class="single-post_title"><a href="/post/<%= post.Id %>"><%= post.Title %></a></h3>
+                            <p class="single-post_content"><%- post.Contents %></p>
+                        </div>
+                        <div class="admin-edit-remove">
+                            <p><a href="/post/<%= post.Id %>"><i class="fa-solid fa-comments fa-2x"></i></a></p>
+                        </div>
+                    </aside>
                 </article>
             <% 
         }) %>

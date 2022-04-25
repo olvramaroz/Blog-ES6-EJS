@@ -138,6 +138,20 @@ app.post('/admin/edit/:id', (req, res) => {
 })
 // end update a post admin
 
+// delete post 
+app.get('/admin/delete/:id', (req, res) => {
+    let id = req.params.id
+
+    pool.query(`
+        DELETE
+        FROM post
+        WHERE Id = ?
+    `, [id], (err, result) => {
+        if (err) throw err
+        res.redirect('/admin')
+    })
+})
+// end delete post 
 
 
 /**********************

@@ -6,24 +6,28 @@
     </nav>
 </header>
 <main>
+    <aside class="back-to-home">
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Retour à la page d'accueil</a>
+    </aside>
     <section>
         <% 
-            dataPost.forEach(item => {
+            dataPost.forEach(post => {
                 %>
                     <article class="single-post">
                         <aside class="single-post_header">
-                            <img alt="Avatar de l'auteur de la publication" src="<%= item.Avatar %>" />
+                            <img alt="Avatar de l'auteur de la publication" src="<%= post.Avatar %>" />
                             <div>
-                                <p><span><%- item.FirstName %> <%- item.LastName %></span></p>
-                                <p class="font14"><%- item.CreationTimestamp.toLocaleDateString() %></p>
+                                <p><span><%- post.FirstName %> <%- post.LastName %></span></p>
+                                <p class="font14"><%- post.CreationTimestamp.toLocaleDateString() %></p>
                             </div>
                         </aside>
 
-                        <h3 class="single-post_title"><%= item.Title %></h3>
-                        <div class="single-post_body">
-                            <p><%- item.Contents %></p>
-                            <p><i class="fa-solid fa-heart fa-lg"></i></p>
-                        </div>
+                        <aside class="container-post">
+                            <div class="container-post_txt">
+                                <h3 class="single-post_title"><%= post.Title %></a></h3>
+                                <p class="single-post_content"><%- post.Contents %></p>
+                            </div>
+                    </aside>
                     </article>
                 <%
             })
