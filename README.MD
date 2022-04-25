@@ -7,9 +7,16 @@
 # 🧐 Project philosophy
 
 > A CRUD app using MySQL database, pool method.
+>
 > Training to use SQL queries with post and get method only (as it's not a RESTFUL API)
 >
 > The purpose of this project is to inject and retrieve data from the database.
+>
+> The app : 
+>
+> You reach the homepage where you can see all the posts available, then you can click on any particular post to see the comments linked to it.
+>
+> In the admin panel, you can edit or remove any post, or create one.
 
 
 <br />
@@ -55,7 +62,7 @@ Vous devez avoir Node.js installé globalement sur votre machine.
    ```
 4. Run the project
    ```sh
-   npm run start;
+   npm run start
    ```
 
  <br />
